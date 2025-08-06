@@ -1,11 +1,11 @@
 import React from 'react';
 import { VehicleWithImages } from '@directdrive/core-types';
-import { Button } from './button';
+import { Button } from './button.tsx';
 import { Tag, Fuel, Gauge, GitMerge, MapPin, Heart } from 'lucide-react';
 import { useAuth } from '@directdrive/hooks';
 import { useFetchSavedVehicleListings, useToggleSaveVehicle } from '@directdrive/hooks';
 import { formatPrice, formatMileage } from '@directdrive/utils';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip.tsx';
 
 interface VehicleCardProps {
   vehicle: VehicleWithImages;
@@ -13,7 +13,7 @@ interface VehicleCardProps {
   viewMode?: 'grid' | 'list';
 }
 
-const InfoItem: React.FC<{ icon: React.ElementType; label: string | null }> = ({ icon: Icon, label }) => (
+const InfoItem: React.FC<{ icon: React.ElementType; label: string | undefined }> = ({ icon: Icon, label }) => (
   <div className="flex items-center gap-2 text-sm text-textSecondary">
     <Icon size={16} className="text-primary" />
     <span>{label}</span>
@@ -21,26 +21,23 @@ const InfoItem: React.FC<{ icon: React.ElementType; label: string | null }> = ({
 );
 
 export const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle, LinkComponent, viewMode = 'grid' }) => {
-  const { user } = useAuth();
-  const { data: savedVehicles } = useFetchSavedVehicleListings(user?.id);
-  const { mutate: toggleSave, isPending: isTogglingSave } = useToggleSaveVehicle();
-
-  // The compiler error is the source of truth. Even if the type definition is strict,
-  // the data source might return null. We must handle it.
-  if (!vehicle || vehicle.listing_id === null) {
-    // Don't render the card if essential data is missing.
+  // If essential data is missing, don't render the card to prevent errors.
+  if (!vehicle || vehicle.listing_id == null) {
     return null;
   }
 
-  const isSaved = savedVehicles?.has(vehicle.listing_id) || false;
+  const { user } = useAuth();
+  const { data: savedVehiclesSet } = useFetchSavedVehicleListings(user?.id);
+  const { mutate: toggleSave, isPending: isTogglingSave } = useToggleSaveVehicle();
+
+  const isSaved = savedVehiclesSet?.has(vehicle.listing_id) || false;
 
   const handleSaveClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    // The null check for vehicle.listing_id is handled by the early return at the component's start.
     if (user) {
       toggleSave({
-        listingId: vehicle.listing_id,
+        listingId: vehicle.listing_id, // Safe due to the null check at the start
         isSaved,
       });
     }

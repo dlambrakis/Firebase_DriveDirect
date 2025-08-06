@@ -40,7 +40,7 @@ interface VehicleFilters {
 
 declare const formatFilterValue: (key: string, value: any, allFilters: Partial<VehicleFilters>) => string;
 declare const formatFilterLabel: (key: string) => string;
-declare const getActiveFilters: (filters: Partial<VehicleFilters>) => [string, string | number | string[]][];
+declare const getActiveFilters: (filters: Partial<VehicleFilters>) => Array<[keyof VehicleFilters, any]>;
 
 /**
  * Formats a number into a South African Rand (ZAR) currency string.

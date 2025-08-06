@@ -39,20 +39,21 @@ function App() {
       <AuthProvider>
         <TooltipProvider>
           <Router>
-            <Layout>
-              <Routes>
+            <Routes>
+              {/* Use Layout for routes that should have the header and footer */}
+              <Route path="/" element={<Layout />}>
                 {/* Public Routes */}
-                <Route path="/" element={<HomePage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignUpPage />} />
-                <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-                <Route path="/update-password" element={<UpdatePasswordPage />} />
-                <Route path="/search" element={<SearchPage />} />
-                <Route path="/vehicle/:listingId" element={<VehicleDetailPage />} />
+                <Route index element={<HomePage />} /> {/* Use index route for the root path */}
+                <Route path="login" element={<LoginPage />} />
+                <Route path="signup" element={<SignUpPage />} />
+                <Route path="forgot-password" element={<ForgotPasswordPage />} />
+                <Route path="update-password" element={<UpdatePasswordPage />} />
+                <Route path="search" element={<SearchPage />} />
+                <Route path="vehicle/:listingId" element={<VehicleDetailPage />} />
 
                 {/* Protected Routes */}
                 <Route
-                  path="/dashboard"
+                  path="dashboard"
                   element={
                     <ProtectedRoute>
                       <DashboardPage />
@@ -60,7 +61,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/create-listing"
+                  path="create-listing"
                   element={
                     <ProtectedRoute>
                       <CreateListingPage />
@@ -68,7 +69,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/edit-listing/:listingId"
+                  path="edit-listing/:listingId"
                   element={
                     <ProtectedRoute>
                       <EditListingPage />
@@ -76,7 +77,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/my-listings"
+                  path="my-listings"
                   element={
                     <ProtectedRoute>
                       <MyListingsPage />
@@ -84,7 +85,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/saved-vehicles"
+                  path="saved-vehicles"
                   element={
                     <ProtectedRoute>
                       <SavedVehiclesPage />
@@ -92,7 +93,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/profile"
+                  path="profile"
                   element={
                     <ProtectedRoute>
                       <ProfilePage />
@@ -100,7 +101,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/edit-profile"
+                  path="edit-profile"
                   element={
                     <ProtectedRoute>
                       <EditProfilePage />
@@ -109,7 +110,7 @@ function App() {
                 />
                 {/* Nested Routes for Messaging */}
                 <Route
-                  path="/messages"
+                  path="messages"
                   element={
                     <ProtectedRoute>
                       <MessagesPage />
@@ -121,11 +122,11 @@ function App() {
                     element={<ConversationView />}
                   />
                 </Route>
+              </Route> {/* Close the Layout route */}
 
-                {/* Catch-all 404 Route */}
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </Layout>
+              {/* Catch-all 404 Route (outside the Layout route) */}
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
           </Router>
           <Toaster />
         </TooltipProvider>

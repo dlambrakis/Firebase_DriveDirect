@@ -47,9 +47,15 @@ var formatFilterLabel = (key) => {
   return key.replace(/([A-Z])/g, " $1").replace(/\b(min|max)\b/g, "").replace(/\b\w/g, (l) => l.toUpperCase()).trim();
 };
 var getActiveFilters = (filters) => {
-  return Object.entries(filters).filter(
-    ([key, value]) => key !== "pageNumber" && key !== "pageSize" && key !== "searchTerm" && value !== void 0 && value !== "" && value !== 0 && (!Array.isArray(value) || value.length > 0)
-  );
+  const activeFilters = [];
+  const filterKeys = Object.keys(filters);
+  filterKeys.forEach((key) => {
+    const value = filters[key];
+    if (key !== "pageNumber" && key !== "pageSize" && key !== "searchTerm" && value !== void 0 && value !== "" && value !== 0 && (!Array.isArray(value) || value.length > 0)) {
+      activeFilters.push([key, value]);
+    }
+  });
+  return activeFilters;
 };
 
 // src/formatting.ts

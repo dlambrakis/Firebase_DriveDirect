@@ -9,7 +9,7 @@ export const formatFilterValue = (key: string, value: any, allFilters: Partial<V
   if (key === 'minPrice' && allFilters.maxPrice) return `${formatPrice(value)} - ${formatPrice(allFilters.maxPrice)}`;
   if (key === 'maxPrice' && !allFilters.minPrice) return `< ${formatPrice(value)}`;
   if (key === 'minPrice') return `> ${formatPrice(value)}`;
-  
+
   if (key === 'minMileage' && allFilters.maxMileage) return `${formatKm(value)} - ${formatKm(allFilters.maxMileage)}`;
   if (key === 'maxMileage' && !allFilters.minMileage) return `< ${formatKm(value)}`;
   if (key === 'minMileage') return `> ${formatKm(value)}`;
@@ -33,15 +33,24 @@ export const formatFilterLabel = (key: string): string => {
     .trim();
 };
 
-export const getActiveFilters = (filters: Partial<VehicleFilters>) => {
-  return Object.entries(filters).filter(
-    ([key, value]) => 
-      key !== 'pageNumber' && 
-      key !== 'pageSize' && 
+export const getActiveFilters = (filters: Partial<VehicleFilters>): Array<[keyof VehicleFilters, any]> => {
+  const activeFilters: Array<[keyof VehicleFilters, any]> = [];
+  const filterKeys: Array<keyof VehicleFilters> = Object.keys(filters) as Array<keyof VehicleFilters>;
+
+  filterKeys.forEach(key => {
+    const value = filters[key];
+    if (
+      key !== 'pageNumber' &&
+      key !== 'pageSize' &&
       key !== 'searchTerm' &&
-      value !== undefined && 
-      value !== '' && 
+      value !== undefined &&
+      value !== '' &&
       value !== 0 &&
       (!Array.isArray(value) || value.length > 0)
-  );
+    ) {
+      activeFilters.push([key, value]);
+    }
+  });
+
+  return activeFilters;
 };

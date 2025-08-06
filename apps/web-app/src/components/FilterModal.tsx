@@ -10,7 +10,9 @@ import {
   ScrollArea,
   Checkbox,
   Label,
-  Slider,
+
+} from '@directdrive/ui';
+import { Slider } from '../ui/slider';
 } from '@directdrive/ui';
 import { VehicleFilters, FilterOptionsResponse } from '@directdrive/core-types';
 import { Loader2 } from 'lucide-react';
