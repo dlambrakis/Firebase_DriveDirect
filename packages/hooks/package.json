@@ -1,0 +1,36 @@
+{
+  "name": "@directdrive/hooks",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@directdrive/core-types": "workspace:*",
+    "@directdrive/supabase-client": "workspace:*",
+    "@hookform/resolvers": "^5.2.1",
+    "@tanstack/react-query": "5.84.1",
+    "react-hook-form": "^7.52.1",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19"
+  },
+  "devDependencies": {
+    "eslint": "^9.32.0",
+    "react": "^19.1.1",
+    "tsup": "^8.5.0",
+    "typescript": "5.8.3"
+  }
+}

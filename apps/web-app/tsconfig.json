@@ -1,0 +1,41 @@
+{
+  "extends": "../../packages/typescript-config/react-app.json",
+  "include": [
+    "src",
+    "vite.config.ts"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@directdrive/auth": [
+        "../../packages/auth/src"
+      ],
+      "@directdrive/core-types": [
+        "../../packages/core-types/src"
+      ],
+      "@directdrive/hooks": [
+        "../../packages/hooks/src"
+      ],
+      "@directdrive/supabase-client": [
+        "../../packages/supabase-client/src"
+      ],
+      "@directdrive/ui": [
+        "../../packages/ui/src"
+      ],
+      "@directdrive/theme": [
+        "../../packages/theme"
+      ],
+      "@directdrive/utils": [
+        "../../packages/utils/src"
+      ],
+      "@directdrive/supabase-types": [
+        "../../supabase/database.types.ts"
+      ]
+    },
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./apps/web-app" },
+    { "path": "./apps/expo-app" },
+    { "path": "./packages/core-types" },
+    { "path": "./packages/supabase-client" },
+    { "path": "./packages/ui" },
+    { "path": "./packages/utils" }
+  ]
+}

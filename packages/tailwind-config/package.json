@@ -1,0 +1,10 @@
+{
+  "name": "@directdrive/tailwind-config",
+  "version": "0.1.0",
+  "private": true,
+  "main": "tailwind.config.js",
+  "dependencies": {
+    "@directdrive/theme": "workspace:*",
+    "tailwindcss": "4.1.11"
+  }
+}

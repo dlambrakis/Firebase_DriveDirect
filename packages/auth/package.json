@@ -1,0 +1,29 @@
+{
+      "name": "@directdrive/auth",
+      "version": "1.0.0",
+      "private": true,
+      "main": "./dist/index.js",
+      "module": "./dist/index.mjs",
+      "types": "./dist/index.d.ts",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "import": "./dist/index.mjs",
+          "require": "./dist/index.js"
+        }
+      },
+      "scripts": {
+        "build": "tsup",
+        "lint": "eslint ."
+      },
+      "dependencies": {
+        "@directdrive/supabase-client": "workspace:*",
+    		"react": "19.1.1"
+      },
+      "devDependencies": {
+    		"@types/react": "19.1.9",
+        "eslint": "^9.32.0",
+        "tsup": "8.5.0",
+    		"typescript": "5.8.3"
+      }
+    }

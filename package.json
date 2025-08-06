@@ -1,0 +1,56 @@
+{
+  "name": "directdrive-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm clean && pnpm install && pnpm --recursive build",
+    "diagnose": "node scripts/diagnose-lockfile.js",
+    "bootstrap": "node scripts/bootstrap.js",
+    "build": "pnpm --filter=\"./packages/*\" build",
+    "fb": "tsc && vite build --force",
+    "lint": "pnpm --filter=\"./packages/*\" lint && pnpm --filter=\"./apps/*\" lint",
+    "clean": "node scripts/clean-node-modules.js && node scripts/clean-wireit-cache.js",
+    "clean:node_modules": "node scripts/clean-node-modules.js",
+    "clean:wireit_cache": "node scripts/clean-wireit-cache.js",
+    "web": "pnpm --filter @directdrive/web-app dev",
+    "mobile": "pnpm --filter @directdrive/expo-app start",
+    "concurrently": "concurrently \"pnpm run web\" \"pnpm run mobile\"",
+    "db:ingest:vehicles": "node scripts/ingest-vehicle-data.js",
+    "db:ingest:locations": "node scripts/ingest-location-data.js",
+    "db:types": "supabase gen types typescript --project-id uxqgsjrlxmqcxkuefgvn > supabase/database.types.ts"
+  },
+  "devDependencies": {
+    "@eslint-community/eslint-utils": "4.7.0",
+    "@prisma/client": "6.13.0",
+    "@supabase/supabase-js": "2.53.0",
+    "@types/react": "19.1.9",
+    "@types/react-dom": "19.1.7",
+    "@typescript-eslint/eslint-plugin": "8.38.0",
+    "@typescript-eslint/parser": "8.38.0",
+    "bplist-parser": "0.3.2",
+    "concurrently": "9.2.0",
+    "csv-parse": "6.1.0",
+    "dotenv": "17.2.1",
+    "eslint": "9.32.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-react-refresh": "0.4.20",
+    "prettier": "3.6.2",
+    "supabase": "2.33.9",
+    "tsup": "8.5.0",
+    "tsx": "4.20.3",
+   	"typescript": "5.8.3",
+    "uuid": "11.1.0"
+  },
+  "packageManager": "pnpm@9.1.1",
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.1.9",
+      "@types/react-dom": "19.1.7",
+      "bplist-parser": "0.3.2",
+      "uuid": "11.1.0",
+      "glob": "11.0.3",
+      "rimraf": "6.0.1"
+    }
+  }
+}

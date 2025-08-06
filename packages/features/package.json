@@ -1,0 +1,17 @@
+{
+  "name": "@directdrive/features",
+  "version": "0.0.0",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@directdrive/core-types": "workspace:*",
+    "@directdrive/hooks": "workspace:*",
+    "react-hook-form": "^7.51.3",
+    "react": "^19.1.1"
+  },
+  "devDependencies": {
+    "@directdrive/typescript-config": "workspace:*",
+    "typescript": "5.8.3"
+  }
+}
